@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-up" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextobjectid="24">
+ <tileset firstgid="1" source="dark.tsx"/>
+ <tileset firstgid="5" source="chain.tsx"/>
+ <tileset firstgid="6" source="Mossy_tiles.tsx"/>
+ <tileset firstgid="10" source="light.tsx"/>
+ <tileset firstgid="14" source="door.tsx"/>
+ <tileset firstgid="15" source="lazer.tsx"/>
+ <tileset firstgid="17" source="mossy_ramps.tsx"/>
+ <tileset firstgid="21" source="moss_chain.tsx"/>
+ <tileset firstgid="22" source="computer.tsx"/>
+ <tileset firstgid="23" source="door.tsx"/>
+ <layer name="Tile Layer 1" width="20" height="20">
+  <data encoding="csv">
+1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,
+0,5,0,5,0,5,0,3221225477,0,3221225488,0,0,0,0,0,0,5,0,0,0,
+0,5,0,5,0,5,0,3221225477,0,15,0,0,0,0,0,0,5,0,0,0,
+0,5,22,5,0,5,0,3221225477,0,15,0,0,0,0,0,0,5,0,0,0,
+0,11,1,11,0,5,0,3221225477,0,15,0,0,0,0,0,0,5,0,0,0,
+0,5,0,5,0,5,0,3221225477,0,15,0,0,0,0,0,1,11,1,0,0,
+0,5,0,5,0,1,11,1,0,15,0,0,0,0,0,11,1,11,0,0,
+0,5,0,5,0,5,0,3221225477,0,15,0,0,0,0,0,1,11,1,0,0,
+0,5,0,5,0,5,0,3221225477,0,15,0,0,0,0,0,0,0,0,0,0,
+0,5,0,5,0,5,0,3221225477,0,15,0,0,0,0,0,0,0,0,0,0,
+0,5,0,5,0,5,0,5,0,15,0,0,0,0,0,0,0,0,0,0,
+0,5,0,5,0,5,0,3221225477,0,15,0,0,0,0,0,0,0,0,0,0,
+0,1,11,1,0,5,0,3221225477,0,15,0,0,0,0,0,0,0,0,0,0,
+0,5,0,5,0,5,0,3221225477,0,15,0,0,0,0,0,0,0,0,0,0,
+0,5,0,5,0,1,11,1,0,15,0,0,0,0,0,0,0,0,0,0,
+0,5,0,5,0,5,0,3221225477,0,15,0,0,0,0,0,0,0,0,0,0,
+0,5,0,5,0,5,0,3221225477,0,16,0,0,0,0,0,0,0,0,0,23,
+11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,
+1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,
+11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1
+</data>
+ </layer>
+ <objectgroup name="collision">
+  <object id="13" x="0" y="544">
+   <polygon points="0,0 640,0 640,96 0,96"/>
+  </object>
+  <object id="14" x="160" y="448">
+   <polygon points="0,0 96,0 96,32 0,32"/>
+  </object>
+  <object id="15" x="32" y="384">
+   <polygon points="0,0 96,0 96,32 0,32"/>
+  </object>
+  <object id="17" x="160" y="192">
+   <polygon points="0,0 96,0 96,32 0,32"/>
+  </object>
+  <object id="19" x="32" y="128">
+   <polygon points="0,0 96,0 96,32 0,32"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="kill">
+  <object id="23" x="299" y="35">
+   <polygon points="0,0 0,497 5,497 5,0 -2,-2"/>
+  </object>
+ </objectgroup>
+</map>
