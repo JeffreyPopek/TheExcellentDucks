@@ -2,21 +2,26 @@ package com.mygdx.game.States;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.Sprites.Bird;
+import com.mygdx.game.Sprites.Controller;
+import com.mygdx.game.Sprites.Player;
 import com.mygdx.game.TheExcellentDucks;
 
 public class PlayState extends State {
-    Bird bird;
+
+
+    Player player;
+    Controller controller;
     Texture bg;
 
     public PlayState(GameStateManager stateManager) {
         super(stateManager);
 
-        bird = new Bird(50, 100, this);
+        player = new Player(50, 100, this);
 
 
         bg = new Texture("bg.png");
 
+        controller = new Controller(cam);
 
     }
 
@@ -24,9 +29,24 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
-        bird.update(dt);
+        player.update(dt);
 
+
+        if (controller.isLeftPressed()) {
+            player.moveLeft();
+        } else if (controller.isRightPressed()) {
+            player.moveRight();
+        } else {
+            player.resetAnim();
+
+        }
+        if (controller.isJumpPressed()) {
+            System.out.println("hi");
+            player.jump();
+        }
     }
+
+
 
 
     @Override
@@ -40,7 +60,8 @@ public class PlayState extends State {
 
         sb.begin();
         sb.draw(bg, 0, 0, TheExcellentDucks.WIDTH, TheExcellentDucks.HEIGHT);
-        sb.draw(bird.getTexture(), bird.getBounds().x, bird.getPosition().y);
+        sb.draw(player.getTexture(), player.getBounds().x, player.getPosition().y);
+        controller.draw(sb);
 
         sb.end();
     }
