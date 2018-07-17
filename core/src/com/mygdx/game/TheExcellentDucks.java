@@ -20,7 +20,6 @@ public class TheExcellentDucks extends ApplicationAdapter {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
 		gsm.push(new MenuState(gsm));
