@@ -34,8 +34,8 @@ public class Player {
     public Player(int x, int y, State s) {
         position = new Vector2(x, y);
         velocity = new Vector2(0, 0);
-        player = new Texture("WALKING_CHARACTER_1 2.png");
-        jump = new Texture("CHARACTER_JUMPING.png");
+        player = new Texture("Character/WALKING_CHARACTER_1 2.png");
+        jump = new Texture("Character/CHARACTER_JUMPING.png");
         moveSpeed = 150;
         anim = new Animation(new TextureRegion(player), 6, 1f, 3, 2);
         jumpanim = new Animation(new TextureRegion(jump),4, 0.7f, 2, 2);
