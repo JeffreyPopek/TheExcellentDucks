@@ -10,8 +10,8 @@ public class Animation {
 
     Animation(TextureRegion region, int frameCount, float cycleTime, int row, int col) {
         frames = new Array<TextureRegion>();
-        int frameWidth = region.getRegionWidth() / row;
-        int frameHeight = region.getRegionHeight() / col;
+        int frameWidth = region.getRegionWidth() / col;
+        int frameHeight = region.getRegionHeight() / row;
 
         /*
         Add frames from the spritesheet.
