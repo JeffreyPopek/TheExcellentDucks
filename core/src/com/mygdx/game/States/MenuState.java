@@ -20,7 +20,7 @@ public class MenuState extends State {
 
     public MenuState(GameStateManager stateManager) {
         super(stateManager);
-        playBtn = new Texture("PlayButton.png");
+        playBtn = new Texture("buttons/PlayButton.png");
         background =  new Texture("Textures/background.png");
         playbutton = new Image(playBtn);
         playbutton.setScale(2);
