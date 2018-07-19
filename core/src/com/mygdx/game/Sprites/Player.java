@@ -6,6 +6,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.mygdx.game.States.PlayState;
 import com.mygdx.game.States.State;
 
 public class Player {
@@ -20,21 +25,48 @@ public class Player {
     private Vector3 touchPos;
     Rectangle bounds;
     private boolean faceRight;
+    private BodyDef playerDef;
+    public Body playerBody;
+    private PolygonShape polygon;
+    private FixtureDef fixtureDef;
+    PlayState game;
+
+
+
 
 
     public Rectangle getBounds() {
         return bounds;
     }
 
-    public Player(int x, int y, State s) {
+    public Player(PlayState game, int x, int y) {
         position = new Vector2(x, y);
         velocity = new Vector2(0, 0);
         bird = new Texture("run_cycle.png");
         moveSpeed = 150;
         anim = new Animation(new TextureRegion(bird), 8, 1f, 3, 3);
-        state = s;
+        state = game;
         touchPos = new Vector3();
         bounds = new Rectangle(position.x, position.y, getTexture().getRegionWidth(), getTexture().getRegionHeight());
+        playerDef = new BodyDef();
+        fixtureDef = new FixtureDef();
+        polygon = new PolygonShape();
+        playerDef.type = BodyDef.BodyType.DynamicBody;
+        playerDef.position.set(x, y);
+        this.game = game;
+        playerBody = game.world.createBody(playerDef);
+        polygon.set(new float[] {0, 0, 1, 0, 1, 2, 0, 2});
+        fixtureDef.shape = polygon;
+        fixtureDef.density = 0.5f;
+        fixtureDef.friction = 0.4f;
+        playerBody.createFixture(fixtureDef);
+        polygon.dispose();
+
+
+
+
+
+
 
     }
 
@@ -82,6 +114,7 @@ public class Player {
 
 
         bounds.setPosition(position.x, position.y);
+        position.set(playerBody.getPosition());
 
     }
 

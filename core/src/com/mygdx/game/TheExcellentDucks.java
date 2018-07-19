@@ -23,10 +23,7 @@ public class TheExcellentDucks extends ApplicationAdapter {
 	public static final int HEIGHT = 480;
 	public static final String TITLE = "TheExcellentDucks";
 	private GameStateManager gsm;
-	private BodyDef playerDef;
-	public Body playerBody;
-	private PolygonShape polygon;
-	private FixtureDef fixtureDef;
+
 
 
 
@@ -38,12 +35,6 @@ public class TheExcellentDucks extends ApplicationAdapter {
 		gsm = new GameStateManager();
 		gsm.push(new MenuState(gsm));
 		Gdx.gl.glClearColor(0, 0, 0, 1);
-		playerDef = new BodyDef();
-		fixtureDef = new FixtureDef();
-		polygon = new PolygonShape();
-		playerDef.type = BodyDef.BodyType.DynamicBody;
-		playerDef.position.set(1, 4);
-		
 
 	}
 
@@ -59,6 +50,5 @@ public class TheExcellentDucks extends ApplicationAdapter {
 	@Override
 	public void dispose() {
 		batch.dispose();
-		img.dispose();
 	}
 }

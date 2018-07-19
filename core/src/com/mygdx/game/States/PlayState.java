@@ -12,11 +12,12 @@ import com.mygdx.game.TheExcellentDucks;
 
 public class PlayState extends State {
 
-    Player player;
+    public Player player;
     Controller controller;
     Texture bg;
-    World world;
+    public World world;
     Box2DDebugRenderer debugRenderer;
+
 
 
 
@@ -25,15 +26,19 @@ public class PlayState extends State {
 
         Box2D.init();
 
-        player = new Player(50, 100, this);
-
         world = new World(new Vector2(0, -9.8f), true);
+
+        player = new Player(this, 50,100);
 
         bg = new Texture("backgound.png");
 
         controller = new Controller(cam);
 
         debugRenderer = new Box2DDebugRenderer();
+
+
+
+
 
 
     }
@@ -72,13 +77,13 @@ public class PlayState extends State {
 
     @Override
     public void render(SpriteBatch sb) {
-
+        sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(bg, 0, 0, TheExcellentDucks.WIDTH, TheExcellentDucks.HEIGHT);
-        sb.draw(player.getTexture(), player.getBounds().x, player.getPosition().y);
+        sb.draw(bg, 0, 0, TheExcellentDucks.WIDTH * State.PTM, TheExcellentDucks.HEIGHT * State.PTM);
+        sb.draw(player.getTexture(), player.getBounds().x * State.PTM, player.getPosition().y * State.PTM, player.getTexture().getRegionWidth() * State.PTM, player.getTexture().getRegionHeight() * State.PTM);
         controller.draw(sb);
-        debugRenderer.render(world, cam.combined);
         sb.end();
+        debugRenderer.render(world, cam.combined);
     }
 
     @Override

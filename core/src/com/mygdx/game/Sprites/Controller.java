@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.States.State;
 import com.mygdx.game.TheExcellentDucks;
 
 import java.util.HashMap;
@@ -93,15 +94,16 @@ public class Controller implements InputProcessor {
 
     public void draw(SpriteBatch batch) {
         for (Image i : buttons) {
+//            i.setScaling(State.PTM);
             i.draw(batch, 0.8f);
         }
     }
 
     public void drawDebug(ShapeRenderer sr) {
-        sr.rect(leftHitbox.x, leftHitbox.y, leftHitbox.width, leftHitbox.height);
-        sr.rect(rightHitbox.x, rightHitbox.y, rightHitbox.width, rightHitbox.height);
-        sr.circle(jumpHitbox.x, jumpHitbox.y, jumpHitbox.radius);
-        sr.circle(attackHitbox.x, attackHitbox.y, attackHitbox.radius);
+        sr.rect(leftHitbox.x * State.PTM,  leftHitbox.y* State.PTM, leftHitbox.width* State.PTM, leftHitbox.height* State.PTM);
+        sr.rect(rightHitbox.x* State.PTM, rightHitbox.y* State.PTM, rightHitbox.width* State.PTM, rightHitbox.height* State.PTM);
+        sr.circle(jumpHitbox.x* State.PTM, jumpHitbox.y* State.PTM, jumpHitbox.radius* State.PTM);
+        sr.circle(attackHitbox.x* State.PTM, attackHitbox.y* State.PTM, attackHitbox.radius* State.PTM);
     }
 
     public boolean isLeftPressed() {
