@@ -3,10 +3,15 @@ package com.mygdx.game.States;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.TheExcellentDucks;
 
 
+
+
 public class MenuState extends State {
+    Texture img;
+    Image playbutton;
 
 
     private Texture background;
@@ -15,8 +20,11 @@ public class MenuState extends State {
 
     public MenuState(GameStateManager stateManager) {
         super(stateManager);
-        background = new Texture("bg.png");
-        playBtn = new Texture("playBtn.png");
+        playBtn = new Texture("PlayButton.png");
+        background =  new Texture("Textures/background.png");
+        playbutton = new Image(playBtn);
+        playbutton.setScale(2);
+        playbutton.setPosition(TheExcellentDucks.WIDTH / 2 - playbutton.getWidth() * playbutton.getScaleX() / 2, TheExcellentDucks.HEIGHT / 2 - playbutton.getHeight() * playbutton.getScaleY() / 2);
 
     }
 
@@ -41,7 +49,7 @@ public class MenuState extends State {
 
         sb.begin();
         sb.draw(background, 0, 0, TheExcellentDucks.WIDTH, TheExcellentDucks.HEIGHT);
-        sb.draw(playBtn, (TheExcellentDucks.WIDTH / 2) - (playBtn.getWidth() / 2), TheExcellentDucks.HEIGHT / 2);
+        playbutton.draw(sb, 1);
         sb.end();
 
     }

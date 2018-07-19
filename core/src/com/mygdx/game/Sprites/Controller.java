@@ -53,7 +53,7 @@ public class Controller implements InputProcessor {
         leftHitbox = new Rectangle(left.getX(), left.getY(), left.getWidth(), left.getHeight());
         buttons.add(left);
 
-        Image right = new Image(new Texture("Left arrow.png"));
+        Image right = new Image(new Texture("Right arrow.png"));
         right.setPosition(left.getWidth() + 4, 0);
         rightHitbox = new Rectangle(right.getX(), right.getY(), right.getWidth(), right.getHeight());
         buttons.add(right);
