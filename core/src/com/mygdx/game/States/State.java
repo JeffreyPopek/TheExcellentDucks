@@ -22,6 +22,8 @@ public abstract class State {
 
     protected abstract void handleInput();
 
+    public static final float PTM = 1/32f;
+
     public abstract void update(float dt);
 
     public abstract void render(SpriteBatch sb);

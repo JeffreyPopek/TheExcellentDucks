@@ -39,8 +39,8 @@ public class MenuState extends State {
     public void render(SpriteBatch sb) {
 
         sb.begin();
-        sb.draw(background, 0, 0, TheExcellentDucks.WIDTH, TheExcellentDucks.HEIGHT);
-        sb.draw(playBtn, (TheExcellentDucks.WIDTH / 2) - (playBtn.getWidth() / 2), TheExcellentDucks.HEIGHT / 2);
+        //sb.draw(background, 0, 0, TheExcellentDucks.WIDTH, TheExcellentDucks.HEIGHT);
+        sb.draw(playBtn, (TheExcellentDucks.WIDTH / 2), TheExcellentDucks.HEIGHT / 2);
         sb.end();
 
     }
@@ -48,7 +48,6 @@ public class MenuState extends State {
     @Override
     public void dispose() {
 
-        background.dispose();
         playBtn.dispose();
 
     }
