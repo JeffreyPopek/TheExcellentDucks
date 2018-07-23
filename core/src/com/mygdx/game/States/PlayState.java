@@ -55,12 +55,15 @@ public class PlayState extends State {
         }
         // if door touches player bounds, do something
         if (door.isCollided(player.getBounds())) {
-           player.setPosition(new Vector2(50, 90));
+           gsm.set(new RoomState(gsm, player, controller));
+           this.hide();
         }
     }
 
+    @Override
+    public void hide() {
 
-
+    }
 
     @Override
     protected void handleInput() {
@@ -71,10 +74,10 @@ public class PlayState extends State {
     @Override
     public void render(SpriteBatch sb) {
 
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.rect(door.getBounds().x, door.getBounds().y, door.getBounds().getWidth(), door.getBounds().getHeight());
-        shapeRenderer.rect(player.getBounds().x, player.getBounds().y, player.getBounds().getWidth(), player.getBounds().getHeight());
-        shapeRenderer.end();
+//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//        shapeRenderer.rect(door.getBounds().x, door.getBounds().y, door.getBounds().getWidth(), door.getBounds().getHeight());
+//        shapeRenderer.rect(player.getBounds().x, player.getBounds().y, player.getBounds().getWidth(), player.getBounds().getHeight());
+//        shapeRenderer.end();
 
         sb.begin();
         sb.draw(bg, 0, 0, TheExcellentDucks.WIDTH, TheExcellentDucks.HEIGHT);
