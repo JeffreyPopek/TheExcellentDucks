@@ -38,6 +38,11 @@ public class MenuState extends State {
     }
 
     @Override
+    public void hide() {
+
+    }
+
+    @Override
     public void update(float dt) {
 
         handleInput();

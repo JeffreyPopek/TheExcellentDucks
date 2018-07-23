@@ -35,7 +35,7 @@ public class Player {
         position = new Vector2(x, y);
         velocity = new Vector2(0, 0);
         player = new Texture("Character/WALKING_CHARACTER_1 2.png");
-        jump = new Texture("Character/CHARACTER_JUMPING.png");
+        jump = new Texture("Character/JumpAnim.png");
         moveSpeed = 150;
         anim = new Animation(new TextureRegion(player), 6, 1f, 3, 2);
         jumpanim = new Animation(new TextureRegion(jump),4, 0.7f, 2, 2);
@@ -43,7 +43,7 @@ public class Player {
         touchPos = new Vector3();
         bounds = new Rectangle(getTexture().getRegionWidth()/3, position.y, getTexture().getRegionWidth() / 3, getTexture().getRegionHeight() * 2 / 3);
         numjump = 1;
-
+        faceRight = true;
     }
 
     public void jump() {
@@ -57,14 +57,21 @@ public class Player {
     }
 
     public void moveLeft() {
-        if (!faceRight) { anim.flipFrames(); }
-        faceRight = true;
+        if (faceRight) {
+            anim.flipFrames();
+            jumpanim.flipFrames();
+        }
+        faceRight = false;
         velocity.x = -250;
     }
 
     public void moveRight() {
-        if (faceRight) { anim.flipFrames(); }
-        faceRight = false;
+        if (!faceRight) {
+            anim.flipFrames();
+            jumpanim.flipFrames();
+        }
+
+        faceRight = true;
 
         velocity.x = 250;
     }
