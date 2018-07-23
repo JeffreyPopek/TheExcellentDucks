@@ -30,6 +30,9 @@ public class Player {
     private PolygonShape polygon;
     private FixtureDef fixtureDef;
     PlayState game;
+    public final float MAX_VELOCITY = 1.0f;
+
+
 
 
 
@@ -47,20 +50,23 @@ public class Player {
         anim = new Animation(new TextureRegion(bird), 8, 1f, 3, 3);
         state = game;
         touchPos = new Vector3();
-        bounds = new Rectangle(position.x, position.y, getTexture().getRegionWidth(), getTexture().getRegionHeight());
+        bounds = new Rectangle(position.x, position.y, getTexture().getRegionWidth() * State.PTM, getTexture().getRegionHeight() * State.PTM);
         playerDef = new BodyDef();
         fixtureDef = new FixtureDef();
         polygon = new PolygonShape();
         playerDef.type = BodyDef.BodyType.DynamicBody;
-        playerDef.position.set(x, y);
+        playerDef.position.set(x * State.PTM, y * State.PTM);
         this.game = game;
         playerBody = game.world.createBody(playerDef);
-        polygon.set(new float[] {0, 0, 1, 0, 1, 2, 0, 2});
+        polygon.set(new float[] {0, 0, getTexture().getRegionWidth() * State.PTM, 0,
+                getTexture().getRegionWidth() * State.PTM, getTexture().getRegionHeight() * State.PTM, 0, getTexture().getRegionHeight() * State.PTM});
         fixtureDef.shape = polygon;
         fixtureDef.density = 0.5f;
         fixtureDef.friction = 0.4f;
         playerBody.createFixture(fixtureDef);
         polygon.dispose();
+        playerBody.setFixedRotation(false);
+
 
 
 
@@ -78,14 +84,22 @@ public class Player {
     public void moveLeft() {
         if (!faceRight) { anim.flipFrames(); }
         faceRight = true;
-        velocity.x = -250;
+        if(playerBody.getLinearVelocity().x < MAX_VELOCITY) {
+            playerBody.applyLinearImpulse(new Vector2(-5, 0), playerBody.getPosition(), true);
+
+        }
+
     }
 
     public void moveRight() {
         if (faceRight) { anim.flipFrames(); }
         faceRight = false;
 
-        velocity.x = 250;
+        if(playerBody.getLinearVelocity().x < MAX_VELOCITY) {
+            playerBody.applyLinearImpulse(new Vector2(5, 0), playerBody.getPosition(), true);
+
+        }
+
     }
 
     public void resetAnim() {
@@ -101,16 +115,18 @@ public class Player {
         }
 
 
-        velocity.scl(dt);
-        position.add(velocity);
-        velocity.scl(1 / dt);
 
-        if (position.y < 0) {
-            position.y = 0;
-        } else {
-            velocity.add(0, GRAVITY);
 
-        }
+//        velocity.scl(dt);
+//        position.add(velocity);
+//        velocity.scl(1 / dt);
+//
+//        if (position.y < 0) {
+//            position.y = 0;
+//        } else {
+//            velocity.add(0, GRAVITY);
+//
+//        }
 
 
         bounds.setPosition(position.x, position.y);

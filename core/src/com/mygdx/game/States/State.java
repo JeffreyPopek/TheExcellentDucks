@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.TheExcellentDucks;
 
 public abstract class State {
+    public static final float PTM = 1/32f;
     protected State(GameStateManager stateManager) {
         cam = new OrthographicCamera();
         cam.setToOrtho(false, TheExcellentDucks.WIDTH * PTM, TheExcellentDucks.HEIGHT * PTM);
@@ -23,7 +24,7 @@ public abstract class State {
 
     protected abstract void handleInput();
 
-    public static final float PTM = 1/32f;
+
 
     public abstract void update(float dt);
 

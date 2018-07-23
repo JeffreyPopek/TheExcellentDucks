@@ -50,17 +50,20 @@ public class Controller implements InputProcessor {
         buttons = new Array<Image>();
 
         Image left = new Image(new Texture("Left arrow.png"));
+        left.setScale(State.PTM);
         left.setPosition(0, 0);
         leftHitbox = new Rectangle(left.getX(), left.getY(), left.getWidth(), left.getHeight());
         buttons.add(left);
 
         Image right = new Image(new Texture("Left arrow.png"));
-        right.setPosition(left.getWidth() + 4, 0);
+        right.setScale(State.PTM);
+        right.setPosition((left.getWidth() + 4) * State.PTM, 0);
         rightHitbox = new Rectangle(right.getX(), right.getY(), right.getWidth(), right.getHeight());
         buttons.add(right);
 
         Image jump = new Image(new Texture("Up Arrow.png"));
-        jump.setPosition(TheExcellentDucks.WIDTH - jump.getWidth(), 0);
+        jump.setScale(State.PTM);
+        jump.setPosition((TheExcellentDucks.WIDTH - jump.getWidth()) * State.PTM, 0);
         jumpHitbox = new Circle(jump.getX() + jump.getWidth() / 2, jump.getY() + jump.getHeight() / 2, jump.getWidth() / 2);
         buttons.add(jump);
 
