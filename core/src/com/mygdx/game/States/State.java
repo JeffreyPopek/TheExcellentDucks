@@ -32,5 +32,7 @@ public abstract class State {
 
     public abstract void dispose();
 
+    public abstract void hide();
+
 
 }

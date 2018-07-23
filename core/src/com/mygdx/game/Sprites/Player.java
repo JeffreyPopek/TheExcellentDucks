@@ -45,7 +45,7 @@ public class Player {
     public Player(PlayState game, int x, int y) {
         position = new Vector2(x, y);
         velocity = new Vector2(0, 0);
-        bird = new Texture("run_cycle.png");
+        bird = new Texture("Character/WALKING_CHARACTER_1 2.png");
         moveSpeed = 150;
         anim = new Animation(new TextureRegion(bird), 8, 1f, 3, 3);
         state = game;

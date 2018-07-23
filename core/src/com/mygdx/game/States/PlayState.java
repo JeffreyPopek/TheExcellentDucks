@@ -47,7 +47,7 @@ public class PlayState extends State {
 
         player = new Player(this, 50,100);
 
-        bg = new Texture("backgound.png");
+        bg = new Texture("Textures/background.png");
 
         controller = new Controller(cam);
 
@@ -124,6 +124,11 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
+
+    }
+
+    @Override
+    public void hide() {
 
     }
 }
