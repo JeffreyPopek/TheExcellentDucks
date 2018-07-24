@@ -65,7 +65,7 @@ public class Player {
         fixtureDef.friction = 0.4f;
         playerBody.createFixture(fixtureDef);
         polygon.dispose();
-        playerBody.setFixedRotation(false);
+        playerBody.setFixedRotation(true);
 
 
 
@@ -85,7 +85,7 @@ public class Player {
         if (!faceRight) { anim.flipFrames(); }
         faceRight = true;
         if(playerBody.getLinearVelocity().x < MAX_VELOCITY) {
-            playerBody.applyLinearImpulse(new Vector2(-5, 0), playerBody.getPosition(), true);
+            playerBody.applyLinearImpulse(new Vector2(-0.5f, 0), playerBody.getPosition(), true);
 
         }
 
@@ -96,7 +96,7 @@ public class Player {
         faceRight = false;
 
         if(playerBody.getLinearVelocity().x < MAX_VELOCITY) {
-            playerBody.applyLinearImpulse(new Vector2(5, 0), playerBody.getPosition(), true);
+            playerBody.applyLinearImpulse(new Vector2(0.5f, 0), playerBody.getPosition(), true);
 
         }
 

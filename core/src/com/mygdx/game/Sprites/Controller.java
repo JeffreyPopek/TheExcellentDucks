@@ -51,15 +51,17 @@ public class Controller implements InputProcessor {
 
         Image left = new Image(new Texture("buttons/Left arrow.png"));
         left.setScale(State.PTM);
-        left.setPosition(0, 0);
-        leftHitbox = new Rectangle(left.getX(), left.getY(), left.getWidth(), left.getHeight());
+        left.setPosition(0 , 0);
+        leftHitbox = new Rectangle(left.getX(), left.getY(), left.getWidth() * State.PTM, left.getHeight() * State.PTM);
         buttons.add(left);
+        System.out.println(leftHitbox.x + "," + leftHitbox.y + "," + leftHitbox.width + "," + leftHitbox.height);
 
         Image right = new Image(new Texture("buttons/Right arrow.png"));
         right.setScale(State.PTM);
         right.setPosition((left.getWidth() + 4) * State.PTM, 0);
-        rightHitbox = new Rectangle(right.getX(), right.getY(), right.getWidth(), right.getHeight());
+        rightHitbox = new Rectangle(right.getX(), right.getY(), right.getWidth() * State.PTM, right.getHeight()* State.PTM);
         buttons.add(right);
+        System.out.println(rightHitbox.x + "," + rightHitbox.y + "," + rightHitbox.width + "," + rightHitbox.height);
 
         Image jump = new Image(new Texture("buttons/Up Arrow.png"));
         jump.setScale(State.PTM);
@@ -103,10 +105,14 @@ public class Controller implements InputProcessor {
     }
 
     public void drawDebug(ShapeRenderer sr) {
+        sr.begin(ShapeRenderer.ShapeType.Line);
         sr.rect(leftHitbox.x * State.PTM,  leftHitbox.y* State.PTM, leftHitbox.width* State.PTM, leftHitbox.height* State.PTM);
         sr.rect(rightHitbox.x* State.PTM, rightHitbox.y* State.PTM, rightHitbox.width* State.PTM, rightHitbox.height* State.PTM);
-        sr.circle(jumpHitbox.x* State.PTM, jumpHitbox.y* State.PTM, jumpHitbox.radius* State.PTM);
-        sr.circle(attackHitbox.x* State.PTM, attackHitbox.y* State.PTM, attackHitbox.radius* State.PTM);
+        sr.end();
+        sr.begin(ShapeRenderer.ShapeType.Filled);
+        //sr.circle(jumpHitbox.x* State.PTM, jumpHitbox.y* State.PTM, jumpHitbox.radius* State.PTM);
+//        sr.circle(attackHitbox.x* State.PTM, attackHitbox.y* State.PTM, attackHitbox.radius* State.PTM);
+        sr.end();
     }
 
     public boolean isLeftPressed() {
@@ -167,7 +173,7 @@ public class Controller implements InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        System.out.println(screenX + "," + screenY);
+        //System.out.println(screenX * State.PTM + "," + screenY * State.PTM);
         if (pointer < 5) {
             touches.get(pointer).touchX = 0;
             touches.get(pointer).touchY = 0;
@@ -182,9 +188,10 @@ public class Controller implements InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        System.out.println(screenX + "," + screenY);
+
         Vector3 touchPos = new Vector3(screenX, screenY, 0);
         camera.unproject(touchPos);
+        System.out.println(touchPos.x + "," + touchPos.y);
         if (pointer < 5) {
             touches.get(pointer).touchX = touchPos.x;
             touches.get(pointer).touchY = touchPos.y;

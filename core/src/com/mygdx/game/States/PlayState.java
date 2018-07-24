@@ -2,6 +2,7 @@ package com.mygdx.game.States;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
@@ -31,14 +32,14 @@ public class PlayState extends State {
     Body groundBody;
     BodyDef groundDef;
     PolygonShape groundShape;
-
+    ShapeRenderer shapeRenderer;
 
 
 
 
     public PlayState(GameStateManager stateManager) {
         super(stateManager);
-
+        shapeRenderer = new ShapeRenderer();
         map = new TmxMapLoader().load("Levels/levels.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, State.PTM);
         Box2D.init();
@@ -110,6 +111,7 @@ public class PlayState extends State {
 
     @Override
     public void render(SpriteBatch sb) {
+        shapeRenderer.setProjectionMatrix(cam.combined);
         sb.setProjectionMatrix(cam.combined);
         renderer.setView(cam);
         renderer.render();
@@ -119,6 +121,7 @@ public class PlayState extends State {
         sb.draw(player.getTexture(), player.getBounds().x, player.getPosition().y, player.getTexture().getRegionWidth() * State.PTM, player.getTexture().getRegionHeight() * State.PTM);
         controller.draw(sb);
         sb.end();
+        //controller.drawDebug(shapeRenderer);
         debugRenderer.render(world, cam.combined);
     }
 
