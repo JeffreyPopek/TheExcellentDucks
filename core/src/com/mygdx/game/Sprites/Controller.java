@@ -29,7 +29,7 @@ public class Controller implements InputProcessor {
 
     // Different depending on what buttons you have
     private Rectangle leftHitbox, rightHitbox;
-    private Circle jumpHitbox, attackHitbox;
+    private Rectangle jumpHitbox, attackHitbox;
 
     private boolean leftPressed, rightPressed, jumpPressed, attackPressed;
 
@@ -49,18 +49,21 @@ public class Controller implements InputProcessor {
         buttons = new Array<Image>();
 
         Image left = new Image(new Texture("buttons/Left arrow.png"));
+        left.setScale(2);
         left.setPosition(0, 0);
-        leftHitbox = new Rectangle(left.getX(), left.getY(), left.getWidth(), left.getHeight());
+        leftHitbox = new Rectangle(left.getX(), left.getY(), left.getWidth() * left.getScaleX(), left.getHeight() * left.getScaleY());
         buttons.add(left);
 
         Image right = new Image(new Texture("buttons/Right arrow.png"));
-        right.setPosition(left.getWidth() + 4, 0);
-        rightHitbox = new Rectangle(right.getX(), right.getY(), right.getWidth(), right.getHeight());
+        right.setScale(2);
+        right.setPosition(left.getWidth() + 32, 0);
+        rightHitbox = new Rectangle(right.getX(), right.getY(), right.getWidth() * right.getScaleX(), right.getHeight() * right.getScaleY());
         buttons.add(right);
 
         Image jump = new Image(new Texture("buttons/Up Arrow.png"));
-        jump.setPosition(TheExcellentDucks.WIDTH - jump.getWidth(), 0);
-        jumpHitbox = new Circle(jump.getX() + jump.getWidth() / 2, jump.getY() + jump.getHeight() / 2, jump.getWidth() / 2);
+        jump.setScale(2);
+        jump.setPosition(TheExcellentDucks.WIDTH - jump.getWidth() * 2, 0);
+        jumpHitbox = new Rectangle(jump.getX(), jump.getY(), jump.getWidth() * jump.getScaleX(), jump.getHeight() * jump.getScaleY());
         buttons.add(jump);
 
 //        Image attack = new Image(new Texture("textures/buttons/attack-button.png"));
@@ -100,8 +103,7 @@ public class Controller implements InputProcessor {
     public void drawDebug(ShapeRenderer sr) {
         sr.rect(leftHitbox.x, leftHitbox.y, leftHitbox.width, leftHitbox.height);
         sr.rect(rightHitbox.x, rightHitbox.y, rightHitbox.width, rightHitbox.height);
-        sr.circle(jumpHitbox.x, jumpHitbox.y, jumpHitbox.radius);
-        sr.circle(attackHitbox.x, attackHitbox.y, attackHitbox.radius);
+        sr.rect(jumpHitbox.x, jumpHitbox.y, jumpHitbox.width, jumpHitbox.height);
     }
 
     public boolean isLeftPressed() {
