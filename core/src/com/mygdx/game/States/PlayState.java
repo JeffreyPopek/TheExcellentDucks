@@ -113,14 +113,19 @@ public class PlayState extends State {
     public void render(SpriteBatch sb) {
         shapeRenderer.setProjectionMatrix(cam.combined);
         sb.setProjectionMatrix(cam.combined);
+
         renderer.setView(cam);
+        sb.begin();
+        sb.draw(bg, 0, 0, TheExcellentDucks.WIDTH * State.PTM, TheExcellentDucks.HEIGHT * State.PTM);
+        sb.draw(player.getTexture(), player.getBounds().x, player.getPosition().y, player.getTexture().getRegionWidth() * State.PTM, player.getTexture().getRegionHeight() * State.PTM);
+        sb.end();
+
         renderer.render();
 
         sb.begin();
-        //sb.draw(bg, 0, 0, TheExcellentDucks.WIDTH * State.PTM, TheExcellentDucks.HEIGHT * State.PTM);
-        sb.draw(player.getTexture(), player.getBounds().x, player.getPosition().y, player.getTexture().getRegionWidth() * State.PTM, player.getTexture().getRegionHeight() * State.PTM);
         controller.draw(sb);
         sb.end();
+
         //controller.drawDebug(shapeRenderer);
         debugRenderer.render(world, cam.combined);
     }

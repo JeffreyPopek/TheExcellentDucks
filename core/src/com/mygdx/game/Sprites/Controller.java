@@ -66,7 +66,7 @@ public class Controller implements InputProcessor {
         Image jump = new Image(new Texture("buttons/Up Arrow.png"));
         jump.setScale(State.PTM);
         jump.setPosition((TheExcellentDucks.WIDTH - jump.getWidth()) * State.PTM, 0);
-        jumpHitbox = new Circle(jump.getX() + jump.getWidth() / 2, jump.getY() + jump.getHeight() / 2, jump.getWidth() / 2);
+        jumpHitbox = new Circle(jump.getX() + jump.getWidth() / 2 * State.PTM, jump.getY() + jump.getHeight() / 2 * State.PTM, jump.getWidth() / 2 * State.PTM);
         buttons.add(jump);
 
 //        Image attack = new Image(new Texture("textures/buttons/attack-button.png"));
