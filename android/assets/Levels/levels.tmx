@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-up" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextobjectid="5">
- <tileset firstgid="1" source="light.tsx"/>
- <tileset firstgid="5" source="dark.tsx"/>
- <tileset firstgid="9" source="door.tsx"/>
+ <tileset firstgid="1" source="../Textures/light.tsx"/>
+ <tileset firstgid="5" source="../Textures/dark.tsx"/>
+ <tileset firstgid="9" source="../Textures/door.tsx"/>
  <layer name="Tile Layer 1" width="20" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

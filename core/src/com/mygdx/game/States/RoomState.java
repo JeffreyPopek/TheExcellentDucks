@@ -31,7 +31,7 @@ public class RoomState extends State{
 
         }
         if (controller.isJumpPressed()) {
-            if (player.getVelocity().y < 0)
+//            if (player.getVelocity().y < 0)
                 player.jump();
         }
 
