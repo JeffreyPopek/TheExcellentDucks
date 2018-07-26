@@ -48,7 +48,6 @@ public class RoomState extends State{
         sb.begin();
         sb.draw(bg, 0, 0, TheExcellentDucks.WIDTH, TheExcellentDucks.HEIGHT);
         sb.draw(player.getTexture(), player.getPosition().x, player.getPosition().y);
-
         controller.draw(sb);
         sb.end();
 

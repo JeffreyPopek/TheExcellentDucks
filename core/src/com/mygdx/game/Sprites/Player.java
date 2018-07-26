@@ -3,6 +3,7 @@ package com.mygdx.game.Sprites;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -50,7 +51,7 @@ public class Player {
         anim = new Animation(new TextureRegion(bird), 6, 1f, 3, 2);
         state = game;
         touchPos = new Vector3();
-        bounds = new Rectangle(position.x, position.y, getTexture().getRegionWidth() * State.PTM, getTexture().getRegionHeight() * State.PTM);
+
         playerDef = new BodyDef();
         fixtureDef = new FixtureDef();
         polygon = new PolygonShape();
@@ -66,14 +67,7 @@ public class Player {
         playerBody.createFixture(fixtureDef);
         polygon.dispose();
         playerBody.setFixedRotation(true);
-
-
-
-
-
-
-
-
+        bounds = new Rectangle(getTexture().getRegionWidth() * State.PTM / 3, 0, getTexture().getRegionWidth() * State.PTM / 3, getTexture().getRegionHeight() * 2 / 3 * State.PTM);
     }
 
     public void jump() {
@@ -111,29 +105,13 @@ public class Player {
 
 
     public void update(float dt) {
-
         if (playerBody.getLinearVelocity().x != 0) {
             anim.update(dt);
         } else {
             anim.setFrame(0);
         }
 
-
-
-
-//        velocity.scl(dt);
-//        position.add(velocity);
-//        velocity.scl(1 / dt);
-//
-//        if (position.y < 0) {
-//            position.y = 0;
-//        } else {
-//            velocity.add(0, GRAVITY);
-//
-//        }
-
-
-        bounds.setPosition(position.x, position.y);
+        bounds.setPosition(playerBody.getPosition().x + bounds.getWidth(), playerBody.getPosition().y);
         position.set(playerBody.getPosition());
 
     }
