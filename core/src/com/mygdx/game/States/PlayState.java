@@ -45,12 +45,12 @@ public class PlayState extends State {
 
     public PlayState(GameStateManager stateManager) {
         super(stateManager);
-        cam2 = new OrthographicCamera();
-        cam2.setToOrtho(false, TheExcellentDucks.WIDTH * State.PTM / 1.5f, TheExcellentDucks.HEIGHT * State.PTM / 1.5f);
+//        cam2 = new OrthographicCamera();
+//        cam2.setToOrtho(false, TheExcellentDucks.WIDTH * State.PTM / 1.5f, TheExcellentDucks.HEIGHT * State.PTM / 1.5f);
         shapeRenderer = new ShapeRenderer();
         map = new TmxMapLoader().load("Levels/level.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, State.PTM);
-        cam.setToOrtho(false, TheExcellentDucks.WIDTH * State.PTM / 1.5f, TheExcellentDucks.HEIGHT * State.PTM / 1.5f);
+        cam.setToOrtho(false, TheExcellentDucks.WIDTH * State.PTM, TheExcellentDucks.HEIGHT * State.PTM);
 
         Box2D.init();
 
@@ -81,7 +81,7 @@ public class PlayState extends State {
             counter++;
         }
 
-        door = new Door(19, 3);
+        door = new Door(120, 3);
 
 
 
@@ -92,6 +92,7 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         cam.position.set(player.playerBody.getPosition(), 0);
+        cam.update();
         handleInput();
         player.update(dt);
 
@@ -125,15 +126,15 @@ public class PlayState extends State {
         shapeRenderer.setProjectionMatrix(cam.combined);
         sb.setProjectionMatrix(cam.combined);
 
-        renderer.setView(cam2);
-
+        renderer.setView(cam);
+        renderer.render();
         sb.begin();
         sb.draw(bg, 0, 0, TheExcellentDucks.WIDTH * State.PTM, TheExcellentDucks.HEIGHT * State.PTM);
         sb.draw(door.getTexture(), door.getPosition().x, door.getPosition().y, door.getTexture().getWidth() * State.PTM, door.getTexture().getHeight() * State.PTM);
         sb.draw(player.getTexture(), player.playerBody.getPosition().x, player.playerBody.getPosition().y, player.getTexture().getRegionWidth() * State.PTM, player.getTexture().getRegionHeight() * State.PTM);
         sb.end();
 
-        renderer.render();
+
 
         sb.begin();
         controller.draw(sb);
