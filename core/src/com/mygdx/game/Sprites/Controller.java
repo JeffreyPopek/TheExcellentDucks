@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.States.State;
 import com.mygdx.game.TheExcellentDucks;
 
 import java.util.HashMap;
@@ -49,20 +50,20 @@ public class Controller implements InputProcessor {
         buttons = new Array<Image>();
 
         Image left = new Image(new Texture("buttons/Left arrow.png"));
-        left.setScale(2);
+        left.setScale(State.PTM * 2);
         left.setPosition(0, 0);
         leftHitbox = new Rectangle(left.getX(), left.getY(), left.getWidth() * left.getScaleX(), left.getHeight() * left.getScaleY());
         buttons.add(left);
 
         Image right = new Image(new Texture("buttons/Right arrow.png"));
-        right.setScale(2);
-        right.setPosition(left.getWidth() + 32, 0);
+        right.setScale(State.PTM * 2);
+        right.setPosition((left.getWidth() * left.getScaleX() + 4 * State.PTM) , 0);
         rightHitbox = new Rectangle(right.getX(), right.getY(), right.getWidth() * right.getScaleX(), right.getHeight() * right.getScaleY());
         buttons.add(right);
 
         Image jump = new Image(new Texture("buttons/Up Arrow.png"));
-        jump.setScale(2);
-        jump.setPosition(TheExcellentDucks.WIDTH - jump.getWidth() * 2, 0);
+        jump.setScale(State.PTM * 2);
+        jump.setPosition(TheExcellentDucks.WIDTH * State.PTM - jump.getWidth() * State.PTM * 2, 0);
         jumpHitbox = new Rectangle(jump.getX(), jump.getY(), jump.getWidth() * jump.getScaleX(), jump.getHeight() * jump.getScaleY());
         buttons.add(jump);
 
@@ -102,7 +103,7 @@ public class Controller implements InputProcessor {
 
     public void drawDebug(ShapeRenderer sr) {
         sr.rect(leftHitbox.x, leftHitbox.y, leftHitbox.width, leftHitbox.height);
-        sr.rect(rightHitbox.x, rightHitbox.y, rightHitbox.width, rightHitbox.height);
+        sr.rect(rightHitbox.x * State.PTM, rightHitbox.y * State.PTM, rightHitbox.width * State.PTM, rightHitbox.height * State.PTM);
         sr.rect(jumpHitbox.x, jumpHitbox.y, jumpHitbox.width, jumpHitbox.height);
     }
 
