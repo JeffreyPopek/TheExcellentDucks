@@ -46,7 +46,7 @@ public class Player {
     public Player(PlayState game, int x, int y) {
         position = new Vector2(x, y);
         velocity = new Vector2(0, 0);
-        bird = new Texture("Character/WALKING_CHARACTER_1 2.png");
+        bird = new Texture("Character/WALKING_CHARACTER1 2.png");
         moveSpeed = 150;
         anim = new Animation(new TextureRegion(bird), 3, 1f, 2, 2);
         state = game;
@@ -72,7 +72,7 @@ public class Player {
 
     public void jump() {
         if (playerBody.getLinearVelocity().y == 0) {
-            playerBody.applyLinearImpulse(new Vector2(0, 0.5f), playerBody.getPosition(), true);
+            playerBody.applyLinearImpulse(new Vector2(0, 0.7f), playerBody.getPosition(), true);
         }
 
     }
