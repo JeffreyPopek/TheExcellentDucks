@@ -30,7 +30,7 @@ public class Controller implements InputProcessor {
 
     // Different depending on what buttons you have
     private Rectangle leftHitbox, rightHitbox;
-    private Circle jumpHitbox, attackHitbox;
+    private Rectangle jumpHitbox, attackHitbox;
 
     private boolean leftPressed, rightPressed, jumpPressed, attackPressed;
 
@@ -50,23 +50,21 @@ public class Controller implements InputProcessor {
         buttons = new Array<Image>();
 
         Image left = new Image(new Texture("buttons/Left arrow.png"));
-        left.setScale(State.PTM);
-        left.setPosition(0 , 0);
-        leftHitbox = new Rectangle(left.getX(), left.getY(), left.getWidth() * State.PTM, left.getHeight() * State.PTM);
+        left.setScale(State.PTM * 2);
+        left.setPosition(0, 0);
+        leftHitbox = new Rectangle(left.getX(), left.getY(), left.getWidth() * left.getScaleX(), left.getHeight() * left.getScaleY());
         buttons.add(left);
-        System.out.println(leftHitbox.x + "," + leftHitbox.y + "," + leftHitbox.width + "," + leftHitbox.height);
 
         Image right = new Image(new Texture("buttons/Right arrow.png"));
-        right.setScale(State.PTM);
-        right.setPosition((left.getWidth() + 4) * State.PTM, 0);
-        rightHitbox = new Rectangle(right.getX(), right.getY(), right.getWidth() * State.PTM, right.getHeight()* State.PTM);
+        right.setScale(State.PTM * 2);
+        right.setPosition((left.getWidth() * left.getScaleX() + 4 * State.PTM) , 0);
+        rightHitbox = new Rectangle(right.getX(), right.getY(), right.getWidth() * right.getScaleX(), right.getHeight() * right.getScaleY());
         buttons.add(right);
-        System.out.println(rightHitbox.x + "," + rightHitbox.y + "," + rightHitbox.width + "," + rightHitbox.height);
 
         Image jump = new Image(new Texture("buttons/Up Arrow.png"));
-        jump.setScale(State.PTM);
-        jump.setPosition((TheExcellentDucks.WIDTH - jump.getWidth()) * State.PTM, 0);
-        jumpHitbox = new Circle(jump.getX() + jump.getWidth() / 2 * State.PTM, jump.getY() + jump.getHeight() / 2 * State.PTM, jump.getWidth() / 2 * State.PTM);
+        jump.setScale(State.PTM * 2);
+        jump.setPosition(TheExcellentDucks.WIDTH * State.PTM / 1.5f - jump.getWidth() * State.PTM * 2, 0);
+        jumpHitbox = new Rectangle(jump.getX(), jump.getY(), jump.getWidth() * jump.getScaleX(), jump.getHeight() * jump.getScaleY());
         buttons.add(jump);
 
 //        Image attack = new Image(new Texture("textures/buttons/attack-button.png"));
@@ -99,20 +97,14 @@ public class Controller implements InputProcessor {
 
     public void draw(SpriteBatch batch) {
         for (Image i : buttons) {
-//            i.setScaling(State.PTM);
             i.draw(batch, 0.8f);
         }
     }
 
     public void drawDebug(ShapeRenderer sr) {
-        sr.begin(ShapeRenderer.ShapeType.Line);
-        sr.rect(leftHitbox.x * State.PTM,  leftHitbox.y* State.PTM, leftHitbox.width* State.PTM, leftHitbox.height* State.PTM);
-        sr.rect(rightHitbox.x* State.PTM, rightHitbox.y* State.PTM, rightHitbox.width* State.PTM, rightHitbox.height* State.PTM);
-        sr.end();
-        sr.begin(ShapeRenderer.ShapeType.Filled);
-        //sr.circle(jumpHitbox.x* State.PTM, jumpHitbox.y* State.PTM, jumpHitbox.radius* State.PTM);
-//        sr.circle(attackHitbox.x* State.PTM, attackHitbox.y* State.PTM, attackHitbox.radius* State.PTM);
-        sr.end();
+        sr.rect(leftHitbox.x, leftHitbox.y, leftHitbox.width, leftHitbox.height);
+        sr.rect(rightHitbox.x * State.PTM, rightHitbox.y * State.PTM, rightHitbox.width * State.PTM, rightHitbox.height * State.PTM);
+        sr.rect(jumpHitbox.x, jumpHitbox.y, jumpHitbox.width, jumpHitbox.height);
     }
 
     public boolean isLeftPressed() {
@@ -164,7 +156,7 @@ public class Controller implements InputProcessor {
                 leftPressed = false;
             } else if (jumpHitbox.contains(touches.get(pointer).touchX, touches.get(pointer).touchY)) {
                 jumpPressed = true;
-                System.out.println("hi");
+
 
             }
         }
@@ -173,7 +165,6 @@ public class Controller implements InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        //System.out.println(screenX * State.PTM + "," + screenY * State.PTM);
         if (pointer < 5) {
             touches.get(pointer).touchX = 0;
             touches.get(pointer).touchY = 0;
@@ -188,10 +179,8 @@ public class Controller implements InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-
         Vector3 touchPos = new Vector3(screenX, screenY, 0);
         camera.unproject(touchPos);
-        System.out.println(touchPos.x + "," + touchPos.y);
         if (pointer < 5) {
             touches.get(pointer).touchX = touchPos.x;
             touches.get(pointer).touchY = touchPos.y;

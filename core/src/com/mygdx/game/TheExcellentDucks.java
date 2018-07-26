@@ -18,19 +18,14 @@ public class TheExcellentDucks extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 
-
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 480;
+	public static final int WIDTH = 960;
+	public static final int HEIGHT = 540;
 	public static final String TITLE = "TheExcellentDucks";
 	private GameStateManager gsm;
 
-
-
-
-
-
 	@Override
 	public void create() {
+		batch = new SpriteBatch();
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
 		gsm.push(new MenuState(gsm));
