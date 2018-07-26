@@ -42,7 +42,7 @@ public class PlayState extends State {
     public PlayState(GameStateManager stateManager) {
         super(stateManager);
         shapeRenderer = new ShapeRenderer();
-        map = new TmxMapLoader().load("Levels/levels.tmx");
+        map = new TmxMapLoader().load("Levels/level.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, State.PTM);
         Box2D.init();
 
