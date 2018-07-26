@@ -1,6 +1,7 @@
 package com.mygdx.game.Sprites;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,8 +11,11 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.States.State;
 import com.mygdx.game.TheExcellentDucks;
 
@@ -27,6 +31,9 @@ correctly implement touchUp.
 public class Controller implements InputProcessor {
     private OrthographicCamera camera; // We need this to unproject our tap coordinates
     private Array<Image> buttons;
+    private Viewport viewport;
+    public Stage stage;
+    private Player player;
 
     // Different depending on what buttons you have
     private Rectangle leftHitbox, rightHitbox;
@@ -42,31 +49,34 @@ public class Controller implements InputProcessor {
 
     private Map<Integer,TouchInfo> touches = new HashMap<Integer,TouchInfo>();
 
-    public Controller(OrthographicCamera camera) {
+    public Controller(OrthographicCamera camera, Player player) {
         this.camera = camera;
-
+        this.player = player;
         buttons = new Array<Image>();
 
         buttons = new Array<Image>();
-
+        viewport = new FitViewport(TheExcellentDucks.WIDTH * State.PTM / 1.5f, TheExcellentDucks.HEIGHT * State.PTM / 1.5f, this.camera);
+        stage = new Stage();
         Image left = new Image(new Texture("buttons/Left arrow.png"));
         left.setScale(State.PTM * 2);
-        left.setPosition(0, 0);
+        left.setPosition(0,0);
         leftHitbox = new Rectangle(left.getX(), left.getY(), left.getWidth() * left.getScaleX(), left.getHeight() * left.getScaleY());
         buttons.add(left);
+        stage.addActor(left);
 
         Image right = new Image(new Texture("buttons/Right arrow.png"));
         right.setScale(State.PTM * 2);
         right.setPosition((left.getWidth() * left.getScaleX() + 4 * State.PTM) , 0);
         rightHitbox = new Rectangle(right.getX(), right.getY(), right.getWidth() * right.getScaleX(), right.getHeight() * right.getScaleY());
         buttons.add(right);
+        stage.addActor(right);
 
         Image jump = new Image(new Texture("buttons/Up Arrow.png"));
         jump.setScale(State.PTM * 2);
         jump.setPosition(TheExcellentDucks.WIDTH * State.PTM / 1.5f - jump.getWidth() * State.PTM * 2, 0);
         jumpHitbox = new Rectangle(jump.getX(), jump.getY(), jump.getWidth() * jump.getScaleX(), jump.getHeight() * jump.getScaleY());
         buttons.add(jump);
-
+        stage.addActor(jump);
 //        Image attack = new Image(new Texture("textures/buttons/attack-button.png"));
 //        attack.setPosition(TheExcellentDucks.WIDTH - attack.getWidth(), jump.getHeight() + 4);
 //        attackHitbox = new Circle(attack.getX() + attack.getWidth() / 2, attack.getY() + attack.getHeight() / 2, attack.getWidth() / 2);
@@ -125,12 +135,38 @@ public class Controller implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        return false;
+        switch (keycode){
+            case Input.Keys.A:
+                leftPressed = true;
+                break;
+            case Input.Keys.D:
+                rightPressed = true;
+                break;
+            case Input.Keys.SPACE:
+                jumpPressed = true;
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        return false;
+        switch (keycode){
+            case Input.Keys.A:
+                leftPressed = false;
+                break;
+            case Input.Keys.D:
+                rightPressed = false;
+                break;
+            case Input.Keys.SPACE:
+                jumpPressed = false;
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     @Override

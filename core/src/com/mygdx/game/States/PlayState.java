@@ -1,5 +1,6 @@
 package com.mygdx.game.States;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -60,7 +61,7 @@ public class PlayState extends State {
 
         bg = new Texture("Textures/background.png");
 
-        controller = new Controller(cam);
+        controller = new Controller(cam, player);
 
         debugRenderer = new Box2DDebugRenderer();
 
@@ -82,6 +83,7 @@ public class PlayState extends State {
         }
 
         door = new Door(120, 3);
+        Gdx.input.setInputProcessor(controller);
 
 
 
@@ -91,7 +93,7 @@ public class PlayState extends State {
 
     @Override
     public void update(float dt) {
-        cam.position.set(player.playerBody.getPosition(), 0);
+        cam.position.set(player.playerBody.getPosition().x + 7, player.playerBody.getPosition().y + 5, 0);
         cam.update();
         handleInput();
         player.update(dt);
@@ -129,7 +131,7 @@ public class PlayState extends State {
         renderer.setView(cam);
         renderer.render();
         sb.begin();
-        sb.draw(bg, 0, 0, TheExcellentDucks.WIDTH * State.PTM, TheExcellentDucks.HEIGHT * State.PTM);
+        //sb.draw(bg, 0, 0, TheExcellentDucks.WIDTH * State.PTM, TheExcellentDucks.HEIGHT * State.PTM);
         sb.draw(door.getTexture(), door.getPosition().x, door.getPosition().y, door.getTexture().getWidth() * State.PTM, door.getTexture().getHeight() * State.PTM);
         sb.draw(player.getTexture(), player.playerBody.getPosition().x, player.playerBody.getPosition().y, player.getTexture().getRegionWidth() * State.PTM, player.getTexture().getRegionHeight() * State.PTM);
         sb.end();
@@ -137,9 +139,9 @@ public class PlayState extends State {
 
 
         sb.begin();
-        controller.draw(sb);
+//        controller.draw(sb);
         sb.end();
-
+        controller.stage.draw();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.rect(player.getBounds().x, player.getBounds().y, player.getBounds().width, player.getBounds().height);
         shapeRenderer.rect(door.getBounds().x, door.getBounds().y, door.getBounds().width, door.getBounds().height);

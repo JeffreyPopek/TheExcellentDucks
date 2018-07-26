@@ -72,7 +72,7 @@ public class Player {
 
     public void jump() {
         if (playerBody.getLinearVelocity().y == 0) {
-            playerBody.applyLinearImpulse(new Vector2(0, 0.5f), playerBody.getPosition(), true);
+            playerBody.applyLinearImpulse(new Vector2(0, 0.75f), playerBody.getPosition(), true);
         }
 
     }
@@ -81,7 +81,7 @@ public class Player {
         if (!faceRight) { anim.flipFrames(); }
         faceRight = true;
         if(playerBody.getLinearVelocity().x > -MAX_VELOCITY) {
-            playerBody.applyLinearImpulse(new Vector2(-0.5f, 0), playerBody.getPosition(), true);
+            playerBody.applyLinearImpulse(new Vector2(-0.75f, 0), playerBody.getPosition(), true);
 
         }
 
@@ -92,7 +92,7 @@ public class Player {
         faceRight = false;
 
         if(playerBody.getLinearVelocity().x < MAX_VELOCITY) {
-            playerBody.applyLinearImpulse(new Vector2(0.5f, 0), playerBody.getPosition(), true);
+            playerBody.applyLinearImpulse(new Vector2(0.75f, 0), playerBody.getPosition(), true);
 
         }
 

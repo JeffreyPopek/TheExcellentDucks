@@ -29,7 +29,7 @@ public class TheExcellentDucks extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
 		gsm.push(new MenuState(gsm));
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+
 
 	}
 
@@ -37,6 +37,7 @@ public class TheExcellentDucks extends ApplicationAdapter {
 	@Override
 	public void render() {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClearColor(192/255f, 192/255f, 192/255f, 1);
 		gsm.update(Gdx.graphics.getDeltaTime());
 		gsm.render(batch);
 	}
