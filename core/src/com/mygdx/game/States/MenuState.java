@@ -21,10 +21,10 @@ public class MenuState extends State {
     public MenuState(GameStateManager stateManager) {
         super(stateManager);
         playBtn = new Texture("buttons/PlayButton.png");
-        background =  new Texture("Textures/background.png");
+        background =  new Texture("Textures/labescape.png");
         playbutton = new Image(playBtn);
         playbutton.setScale(2);
-        playbutton.setPosition(TheExcellentDucks.WIDTH / 2 - playbutton.getWidth() * playbutton.getScaleX() / 2, TheExcellentDucks.HEIGHT / 2 - playbutton.getHeight() * playbutton.getScaleY() / 2);
+        playbutton.setPosition(TheExcellentDucks.WIDTH / 2 - playbutton.getWidth() * playbutton.getScaleX() / 2, TheExcellentDucks.HEIGHT / 5 - playbutton.getHeight() * playbutton.getScaleY() / 2);
 
     }
 

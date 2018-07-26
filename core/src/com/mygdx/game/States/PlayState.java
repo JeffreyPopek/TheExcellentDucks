@@ -1,5 +1,6 @@
 package com.mygdx.game.States;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -21,6 +22,8 @@ import com.mygdx.game.Sprites.Door;
 import com.mygdx.game.Sprites.Player;
 import com.mygdx.game.TheExcellentDucks;
 
+import javax.swing.plaf.TableHeaderUI;
+
 public class PlayState extends State {
 
     public Player player;
@@ -35,15 +38,20 @@ public class PlayState extends State {
     PolygonShape groundShape;
     ShapeRenderer shapeRenderer;
     Door door;
+    OrthographicCamera cam2;
 
 
 
 
     public PlayState(GameStateManager stateManager) {
         super(stateManager);
+        cam2 = new OrthographicCamera();
+        cam2.setToOrtho(false, TheExcellentDucks.WIDTH * State.PTM / 1.5f, TheExcellentDucks.HEIGHT * State.PTM / 1.5f);
         shapeRenderer = new ShapeRenderer();
         map = new TmxMapLoader().load("Levels/levels.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, State.PTM);
+        cam.setToOrtho(false, TheExcellentDucks.WIDTH * State.PTM / 1.5f, TheExcellentDucks.HEIGHT * State.PTM / 1.5f);
+
         Box2D.init();
 
         world = new World(new Vector2(0, -9.8f), true);
@@ -83,9 +91,9 @@ public class PlayState extends State {
 
     @Override
     public void update(float dt) {
+        cam.position.set(player.playerBody.getPosition(), 0);
         handleInput();
         player.update(dt);
-
 
         if (controller.isLeftPressed()) {
             player.moveLeft();
@@ -96,7 +104,6 @@ public class PlayState extends State {
 
         }
         if (controller.isJumpPressed()) {
-            System.out.println("hi");
             player.jump();
         }
         world.step(1/60f, 6, 2);
@@ -118,7 +125,8 @@ public class PlayState extends State {
         shapeRenderer.setProjectionMatrix(cam.combined);
         sb.setProjectionMatrix(cam.combined);
 
-        renderer.setView(cam);
+        renderer.setView(cam2);
+
         sb.begin();
         sb.draw(bg, 0, 0, TheExcellentDucks.WIDTH * State.PTM, TheExcellentDucks.HEIGHT * State.PTM);
         sb.draw(door.getTexture(), door.getPosition().x, door.getPosition().y, door.getTexture().getWidth() * State.PTM, door.getTexture().getHeight() * State.PTM);
