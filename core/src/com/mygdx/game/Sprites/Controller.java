@@ -63,7 +63,7 @@ public class Controller implements InputProcessor {
 
         Image jump = new Image(new Texture("buttons/Up Arrow.png"));
         jump.setScale(State.PTM * 2);
-        jump.setPosition(TheExcellentDucks.WIDTH * State.PTM - jump.getWidth() * State.PTM * 2, 0);
+        jump.setPosition(TheExcellentDucks.WIDTH * State.PTM / 1.5f - jump.getWidth() * State.PTM * 2, 0);
         jumpHitbox = new Rectangle(jump.getX(), jump.getY(), jump.getWidth() * jump.getScaleX(), jump.getHeight() * jump.getScaleY());
         buttons.add(jump);
 
@@ -156,7 +156,7 @@ public class Controller implements InputProcessor {
                 leftPressed = false;
             } else if (jumpHitbox.contains(touches.get(pointer).touchX, touches.get(pointer).touchY)) {
                 jumpPressed = true;
-                System.out.println("hi");
+
 
             }
         }
@@ -165,7 +165,6 @@ public class Controller implements InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        System.out.println(screenX + "," + screenY);
         if (pointer < 5) {
             touches.get(pointer).touchX = 0;
             touches.get(pointer).touchY = 0;
@@ -180,7 +179,6 @@ public class Controller implements InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        System.out.println(screenX + "," + screenY);
         Vector3 touchPos = new Vector3(screenX, screenY, 0);
         camera.unproject(touchPos);
         if (pointer < 5) {

@@ -48,7 +48,7 @@ public class Player {
         velocity = new Vector2(0, 0);
         bird = new Texture("Character/WALKING_CHARACTER_1 2.png");
         moveSpeed = 150;
-        anim = new Animation(new TextureRegion(bird), 6, 1f, 3, 2);
+        anim = new Animation(new TextureRegion(bird), 3, 1f, 2, 2);
         state = game;
         touchPos = new Vector3();
 
@@ -63,7 +63,7 @@ public class Player {
                 getTexture().getRegionWidth() * State.PTM * 2 / 3, getTexture().getRegionHeight() * 2 / 3 * State.PTM, getTexture().getRegionWidth() * State.PTM / 3, getTexture().getRegionHeight() * 2 / 3 * State.PTM});
         fixtureDef.shape = polygon;
         fixtureDef.density = 0.5f;
-        fixtureDef.friction = 0.4f;
+        fixtureDef.friction = 2f;
         playerBody.createFixture(fixtureDef);
         polygon.dispose();
         playerBody.setFixedRotation(true);
@@ -72,7 +72,7 @@ public class Player {
 
     public void jump() {
         if (playerBody.getLinearVelocity().y == 0) {
-            playerBody.applyLinearImpulse(new Vector2(0, 5f), playerBody.getPosition(), true);
+            playerBody.applyLinearImpulse(new Vector2(0, 0.5f), playerBody.getPosition(), true);
         }
 
     }
